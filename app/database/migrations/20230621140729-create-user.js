@@ -9,11 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
-        allowNull: false,
-        type: Sequelize.STRING
-      },
-      lastName: {
+      name: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -25,10 +21,6 @@ module.exports = {
       password: {
         allowNull: false,
         type: Sequelize.STRING
-      },
-      role: {
-        allowNull: false,
-        type: Sequelize.ENUM('ADMIN', 'VIEWER')
       },
       createdAt: {
         allowNull: false,
