@@ -7,6 +7,14 @@ module.exports = {
   },
   USER_NOT_FOUND: { code: HTTP_STATUS.NOT_FOUND, message: "User not found" },
   WRONG_PASSWORD: { code: HTTP_STATUS.BAD_REQUEST, message: "Wrong password" },
+  TOURNAMENT_NOT_FOUND: {
+    code: HTTP_STATUS.NOT_FOUND,
+    message: "Tournament not found",
+  },
+  MATCH_NOT_FOUND: {
+    code: HTTP_STATUS.NOT_FOUND,
+    message: "Match not found",
+  },
   NOT_AUTHORIZED: {
     code: HTTP_STATUS.NOT_AUTHORIZED,
     message: "Not authorized",

@@ -33,7 +33,7 @@ const errorHandler = (error, req, res, next) => {
     });
   }
 
-  return res.status(SERVER_ERROR.code).json(SERVER_ERROR);
+  return res.status(SERVER_ERROR.code).json({ SERVER_ERROR, error });
 };
 
 module.exports = errorHandler;

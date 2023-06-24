@@ -11,6 +11,8 @@ app.use(express.urlencoded({ extended: false }));
 
 //Routes
 app.use(require("./routes/users"));
+app.use(require("./routes/tournaments"));
+app.use(require("./routes/matches"));
 
 //ErrorHandler
 app.use(require("./middlewares/errorHandler"));
