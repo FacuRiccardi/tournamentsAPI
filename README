@@ -1,0 +1,122 @@
+.ENV config:
+You will need to create an .env file with some values for the database an other funtionality
+
+  "PORT" The port the app will be listening
+
+For the DB config, you will need to add these values:
+
+  "DB_HOST" The host of your database
+  "DB_USERNAME" The user that you will use to give the project rigths over the database
+  "DB_PASSWORD" The password of that user
+  "DB_NAME" The name of the database
+
+For the Bcrypt and JWT packages, you will need this env variables
+
+  "SECRET" The secret to encode the passwords
+  "EXPIRES" The time that will take to the token to expire
+  "ROUNDS" The rounds for the Bcrypt function
+
+And finally, you will need to create this env variables with the information to connect to the Football Data API
+
+  "URL" This will be "https://api.football-data.org"
+  "API_KEY" This will be your API Key to fetch data from the API
+
+
+
+NPM Scripts:
+ - "start": This script will run the migrations and then start the project
+ - "dev": This script will start the project with nodemon to listen for the changes
+ - "db:migrate": This script will run all the migrations
+
+
+
+Endpoints:
+
+User and Auth services:
+
+"/api/signup": Creates a User register in the DB
+  - method: POST
+  - body: { "name": "string", "email": "string", "password": "string" }
+  - response: User JSON and JWT
+
+ "/api/signin": Validate the given information and if valid, return JWT
+  - method: POST
+  - body: { "email": "string", "password": "string" }
+  - response: User JSON and JWT
+
+"/api/user": Return User information through JWT info
+  - method: GET
+  - response: User JSON
+
+"/api/user" Delete the user through the JWT Info
+  - method: DELETE
+
+
+Tournaments services (All of this services need a valid JWT):
+
+"/api/external/tournaments": Get the tournaments from the Football-Data API
+  - method: GET
+  - response: ARRAY of Tournaments JSONs
+
+"/api/tournaments": Create tournaments registers in the DB
+  - method: POST
+  - body: [{
+        "id": "integer,
+        "code": "string",
+        "name": "string",
+        "type": "string",
+        "emblem": "string",
+        "startDate": "date",
+        "endDate": "date"
+    }]
+  - response: ARRAY of Tournaments JSONs
+
+"/api/tournaments": Get the tournaments from the DB
+  - method: GET
+  - response: ARRAY of Tournaments JSONs
+
+"/api/tournaments/:code": Get a tournament by his code
+  - method: GET
+  - response: Tournament JSON
+
+"/api/tournament/:id": Delete a tournament by his ID
+  - method: DELETE
+
+
+Matches services (All of this services need a valid JWT):
+
+"api/external/:code/matches": Get the matches from a Tournament by his Code from the Football-Data API
+  - method: GET
+  - params:
+    - limit: Size of the response array 
+    - page: Page of the matches to response (first page is 0)
+  - response: ARRAY of Matches JSONs
+
+"/api/:code/matches": Create Matches register in the DB, associated with a Tournament, got by the code
+  - method: POST
+  - body: [{
+        "id": "integer",
+        "status": "string",
+        "utcDate": "date",
+        "homeTeamName": "string",
+        "homeTeamCrest": "string",
+        "homeTeamScore": "integer",
+        "awayTeamName": "string",
+        "awayTeamCrest": "string",
+        "awayTeamScore": "integer"
+    }],
+  - response: ARRAY of Matches JSONs
+
+"api/:code/matches": Get the matches from a Tournament by his Code
+  - method: GET
+  - params:
+    - limit: Size of the response array 
+    - page: Page of the matches to response (first page is 0)
+  - response: ARRAY of Matches JSONs
+
+"/api/matches": Delete Matches by ids
+  - method: DELETE
+  - body: [integer]
+
+"/api/:code/matches": Delete Matches by Tournament Code
+  - method: DELETE

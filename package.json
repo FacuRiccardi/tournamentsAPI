@@ -6,10 +6,7 @@
   "scripts": {
     "start": "npx sequelize-cli db:migrate && node -r dotenv/config app/server.js",
     "dev": "nodemon -r dotenv/config app/server.js",
-    "db:create": "sequelize-cli db:create",
-    "db:migrate": "sequelize-cli db:migrate",
-    "db:g:migration": "sequelize-cli migration:generate --name",
-    "db:g:seed": "sequelize-cli seed:generate --name"
+    "db:migrate": "sequelize-cli db:migrate"
   },
   "author": "",
   "license": "ISC",

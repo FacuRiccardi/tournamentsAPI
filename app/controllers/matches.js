@@ -63,6 +63,7 @@ const createMatches = async (req, res) => {
 
 const getMatchesByTournamentCode = async (req, res) => {
   let { code } = req.params;
+  let { limit = 30, page = 0 } = req.query;
 
   let tournament = await Tournament.findOne({
     where: {
@@ -77,6 +78,8 @@ const getMatchesByTournamentCode = async (req, res) => {
       where: {
         tournamentId: tournament.id,
       },
+      limit,
+      offset: page * limit,
     });
 
     res.json({ matches });
